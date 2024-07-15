@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Clique no Círculo</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #gameArea {
+            width: 100vw;
+            height: 80vh;
+            position: relative;
+            border: 1px solid #000;
+            overflow: hidden;
+        }
+
+        #circle {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jogo de Clique no Círculo</h1>
+    <div id="gameArea">
+        <div id="circle"></div>
+    </div>
+    <p id="score">Pontuação: 0</p>
+    <script>
+        let score = 0;
+        const circle = document.getElementById('circle');
+        const scoreDisplay = document.getElementById('score');
+        const gameArea = document.getElementById('gameArea');
+
+        function moveCircle() {
+            const maxX = gameArea.clientWidth - circle.clientWidth;
+            const maxY = gameArea.clientHeight - circle.clientHeight;
+            const newX = Math.floor(Math.random() * maxX);
+            const newY = Math.floor(Math.random() * maxY);
+            circle.style.left = `${newX}px`;
+            circle.style.top = `${newY}px`;
+        }
+
+        circle.addEventListener('click', () => {
+            score++;
+            scoreDisplay.textContent = `Pontuação: ${score}`;
+            moveCircle();
+        });
+
+        moveCircle();
+    </script>
+</body>
+</html>
